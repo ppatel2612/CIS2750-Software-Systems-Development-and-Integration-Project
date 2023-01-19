@@ -47,7 +47,8 @@ void bondget(bond *bond, atom **a1, atom **a2, unsigned char *epairs)
 molecule *molmalloc(unsigned short atom_max, unsigned short bond_max)
 {
 	molecule *mol = (molecule *)malloc(sizeof(molecule));       // Allocate memory for a 'molecule' structure
-    if (mol == NULL) {      // Check if memory allocation failed
+    if (mol == NULL) 
+    {      // Check if memory allocation failed
         return NULL;        // malloc failed
     }
 
@@ -55,13 +56,15 @@ molecule *molmalloc(unsigned short atom_max, unsigned short bond_max)
     mol->atom_no = 0;       // Set the value of atom_no in the structure to zero
     
     mol->atoms = (atom *)malloc(sizeof(atom) * atom_max);       // Allocate memory for array 'atoms' to hold atom_max atoms
-    if (mol->atoms == NULL) {      // Check if memory allocation failed
+    if (mol->atoms == NULL) 
+    {      // Check if memory allocation failed
         free(mol);      // Frees mol structure to ensure no memory errors
         return NULL;        // malloc failed
     }
 
     mol->atom_ptrs = (atom **)malloc(sizeof(atom *) * atom_max);        // Allocate memory for array 'atom_ptrs'
-    if (mol->atom_ptrs == NULL) {      // Check if memory allocation failed
+    if (mol->atom_ptrs == NULL) 
+    {      // Check if memory allocation failed
         free(mol->atoms);       // Frees array in struct before freeing struct to ensure all memory is freed 
         free(mol);      // Frees mol structure to ensure no memory errors
         return NULL;        // malloc failed
@@ -71,14 +74,16 @@ molecule *molmalloc(unsigned short atom_max, unsigned short bond_max)
     mol->bond_no = 0;       // Set the value of bond_no in the structure to zero
 
     mol->bonds = (bond *)malloc(sizeof(bond) * bond_max);       // Allocate memory for array 'bonds' to hold bond_max bonds
-    if (mol->bonds == NULL) {       // Check if memory allocation failed
+    if (mol->bonds == NULL) 
+    {       // Check if memory allocation failed
         free(mol->atoms);       // Frees all allocated memory in the structure to ensure no memory errors
         free(mol->atom_ptrs);   // "'"
         free(mol);              // "'"
         return NULL;        // malloc failed
     }
     mol->bond_ptrs = (bond **)malloc(sizeof(bond *) * bond_max);        // Allocates memory for array 'bond_ ptrs' NOTE: its **
-    if (mol->bond_ptrs == NULL) {       // Check if memory allocation failed
+    if (mol->bond_ptrs == NULL) 
+    {       // Check if memory allocation failed
         free(mol->atoms);       // Frees all allocated memory in the structure to ensure no memory errors
         free(mol->atom_ptrs);
         free(mol->bonds);
@@ -93,7 +98,8 @@ molecule *molcopy(molecule *src)
 {
 	molecule *copied_mol = molmalloc(src->atom_max, src->bond_max);     // Allocates memory for the new struct by calling molmalloc function with the src values for atom_max and bond_max and bond_max
     
-    if (copied_mol == NULL) {       // If memory allocation failed
+    if (copied_mol == NULL) 
+    {       // If memory allocation failed
         return NULL;
     }
 
@@ -121,3 +127,30 @@ void molfree(molecule *ptr)
     free(ptr->bond_ptrs);
     free(ptr);
 }
+
+void molappend_atom(molecule *molecule, atom *atom)
+{
+   // Check if the maximum number of atoms has been reached
+    if (molecule->atom_no == molecule->atom_max) {
+        // Double the size of the atom_max if it's not 0
+        if (molecule->atom_max != 0) {
+            molecule->atom_max *= 2;
+        }
+        // If atom_max is 0, set it to 1
+        else {
+            molecule->atom_max = 1;
+        }
+        // Reallocate memory for the atoms array
+        molecule->atoms = (atom *) realloc(molecule->atoms, sizeof(atom) * molecule->atom_max);
+        // Reallocate memory for the atom_ptrs array
+        molecule->atom_ptrs = (atom **) realloc(molecule->atom_ptrs, sizeof(atom *) * molecule->atom_max);
+    }
+    // Copy the data from the input atom to the next empty space in the atoms array
+    molecule->atoms[molecule->atom_no] = *atom;
+    // Set the corresponding pointer in the atom_ptrs array to the added atom
+    molecule->atom_ptrs[molecule->atom_no] = &molecule->atoms[molecule->atom_no];
+    // Increment the atom_no counter
+    molecule->atom_no++;
+}
+
+
