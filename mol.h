@@ -46,4 +46,7 @@ void yrotation( xform_matrix xform_matrix, unsigned short deg );					//Allocate,
 void zrotation( xform_matrix xform_matrix, unsigned short deg );					//Allocate, compute and return an affine transformation matrix corresponding to a rotation of deg degrees around the z axis
 void mol_xform( molecule *molecule, xform_matrix matrix );							//Apply the transformation matrix to all the atoms of the molecule by performing a vector matrix multiplication on the x, y, and z coordinates
 
+int cmp_atoms(const void *a, const void *b);										//Helper function for sorting atom pointers
+int cmp_bonds(const void *a, const void *b);										//Helper function for sorting bond pointers
+
 #endif

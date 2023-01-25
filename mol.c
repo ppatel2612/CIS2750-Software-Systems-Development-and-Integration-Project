@@ -7,7 +7,7 @@ void atomset(atom *atom, char element[3], double *x, double *y, double *z)
     /*  
      *  Copy the values pointed to by the arguments into the atom stored at atom.
      */
-	strncpy(atom->element, element, 3);     // Uses strncpy to copy over the string as it specifies a maximum length
+	strncpy(atom->element, element, 3);     // Uses strncpy to copy over the string as it specifies atom maximum length
     atom->x = *x;       // Copy over the values POINTED TO by arguments
     atom->y = *y;       // """
     atom->z = *z;       // """
@@ -18,7 +18,7 @@ void atomget(atom *atom, char element[3], double *x, double *y, double *z)
     /*
     * Copy the values in the atom stored at atom to the locations pointed to by element, x, y, and z
     */
-	strncpy(element, atom->element, 3);     // Uses strncpy to copy over the string as it specifies a maximum length
+	strncpy(element, atom->element, 3);     // Uses strncpy to copy over the string as it specifies atom maximum length
     *x = atom->x;       // Copy over the values POINTED TO by the elements
     *y = atom->y;       // """
     *z = atom->z;       // """
@@ -46,7 +46,7 @@ void bondget(bond *bond, atom **a1, atom **a2, unsigned char *epairs)
 
 molecule *molmalloc(unsigned short atom_max, unsigned short bond_max)
 {
-	molecule *mol = (molecule *)malloc(sizeof(molecule));       // Allocate memory for a 'molecule' structure
+	molecule *mol = (molecule *)malloc(sizeof(molecule));       // Allocate memory for atom 'molecule' structure
     if (mol == NULL) 
     {      // Check if memory allocation failed
         return NULL;        // malloc failed
@@ -96,24 +96,34 @@ molecule *molmalloc(unsigned short atom_max, unsigned short bond_max)
 
 molecule *molcopy(molecule *src)
 {
-	molecule *copied_mol = molmalloc(src->atom_max, src->bond_max);     // Allocates memory for the new struct by calling molmalloc function with the src values for atom_max and bond_max and bond_max
-    
-    if (copied_mol == NULL) 
-    {       // If memory allocation failed
-        return NULL;
+    // Allocate memory for the new molecule
+    molecule *new_mol = molmalloc(src->atom_max, src->bond_max);
+
+    // Copy values of atom_max, atom_no, bond_max, bond_no from src to new_mol
+    new_mol->atom_max = src->atom_max;
+    new_mol->atom_no = src->atom_no;
+    new_mol->bond_max = src->bond_max;
+    new_mol->bond_no = src->bond_no;
+
+    // Allocate memory for atoms and atom_ptrs arrays
+    new_mol->atoms = malloc(sizeof(atom) * src->atom_max);
+    new_mol->atom_ptrs = malloc(sizeof(atom *) * src->atom_max);
+
+    // Allocate memory for bonds and bond_ptrs arrays
+    new_mol->bonds = malloc(sizeof(bond) * src->bond_max);
+    new_mol->bond_ptrs = malloc(sizeof(bond *) * src->bond_max);
+
+    // Copy atoms and bonds from src to new_mol using molappend_atom and molappend_bond
+    for (int i = 0; i < src->atom_no; i++)
+    {
+        molappend_atom(new_mol, &src->atoms[i]);
+    }
+    for (int i = 0; i < src->bond_no; i++)
+    {
+        molappend_bond(new_mol, &src->bonds[i]);
     }
 
-    // Copies the values from src to copied_mol structure
-    // Note that enough memory is already allocated as the new structure is the same size as the src structure
-    memcpy(copied_mol->atoms, src->atoms, sizeof(atom) * src->atom_max);
-    memcpy(copied_mol->atom_ptrs, src->atom_ptrs, sizeof(atom *) * src->atom_max);
-    memcpy(copied_mol->bonds, src->bonds, sizeof(bond) * src->bond_max);
-    memcpy(copied_mol->bond_ptrs, src->bond_ptrs, sizeof(bond *) * src->bond_max);
-
-    copied_mol->atom_no = src->atom_no;
-    copied_mol->bond_no = src->bond_no;
-
-    return copied_mol;      // Returns the address of the copied structure's memory
+    return new_mol;
 }
 
 void molfree(molecule *ptr)
@@ -130,27 +140,70 @@ void molfree(molecule *ptr)
 
 void molappend_atom(molecule *molecule, atom *atom)
 {
-   // Check if the maximum number of atoms has been reached
-    if (molecule->atom_no == molecule->atom_max) {
-        // Double the size of the atom_max if it's not 0
-        if (molecule->atom_max != 0) {
-            molecule->atom_max *= 2;
-        }
-        // If atom_max is 0, set it to 1
-        else {
+    if( molecule->atom_no == molecule->atom_max) {
+        molecule->atom_max *= 2;
+        if( molecule->atom_max == 0 )
             molecule->atom_max = 1;
+
+        molecule->atoms = realloc( molecule->atoms, molecule->atom_max * sizeof *molecule->atoms );
+        if (molecule->atoms == NULL) {
+            printf("Error: realloc failed to allocate memory for atoms\n");
+            exit(1);
         }
-        // Reallocate memory for the atoms array
-        molecule->atoms = (atom *) realloc(molecule->atoms, sizeof(atom) * molecule->atom_max);
-        // Reallocate memory for the atom_ptrs array
-        molecule->atom_ptrs = (atom **) realloc(molecule->atom_ptrs, sizeof(atom *) * molecule->atom_max);
+        molecule->atom_ptrs = realloc( molecule->atom_ptrs, molecule->atom_max * sizeof *molecule->atom_ptrs );
+        if (molecule->atom_ptrs == NULL) {
+            printf("Error: realloc failed to allocate memory for atom_ptrs\n");
+            exit(1);
+        }
     }
-    // Copy the data from the input atom to the next empty space in the atoms array
+
     molecule->atoms[molecule->atom_no] = *atom;
-    // Set the corresponding pointer in the atom_ptrs array to the added atom
     molecule->atom_ptrs[molecule->atom_no] = &molecule->atoms[molecule->atom_no];
-    // Increment the atom_no counter
     molecule->atom_no++;
 }
 
+void molappend_bond(molecule *molecule, bond *bond)
+{
+    if( molecule->bond_no == molecule->bond_max) {
+        molecule->bond_max *= 2;
+        if( molecule->bond_max == 0 )
+            molecule->bond_max = 1;
 
+        molecule->bonds = realloc( molecule->bonds, molecule->bond_max * sizeof *molecule->bonds );
+        if (molecule->bonds == NULL) {
+            printf("Error: realloc failed to allocate memory for bonds\n");
+            exit(1);
+        }
+        molecule->bond_ptrs = realloc( molecule->bond_ptrs, molecule->bond_max * sizeof *molecule->bond_ptrs );
+        if (molecule->bond_ptrs == NULL) {
+            printf("Error: realloc failed to allocate memory for bond_ptrs\n");
+            exit(1);
+        }
+    }
+
+    molecule->bonds[molecule->bond_no] = *bond;
+    molecule->bond_ptrs[molecule->bond_no] = &molecule->bonds[molecule->bond_no];
+    molecule->bond_no++;
+}
+
+void molsort(molecule *molecule)
+{
+    qsort(molecule->atom_ptrs, molecule->atom_no, sizeof(atom *), cmp_atoms);
+    qsort(molecule->bond_ptrs, molecule->bond_no, sizeof(bond *), cmp_bonds);
+}
+
+int cmp_atoms(const void *a, const void *b)
+{
+    atom **aa = (atom **) a;
+    atom **bb = (atom **) b;
+    return ((*aa)->z > (*bb)->z) - ((*aa)->z < (*bb)->z);
+}
+
+int cmp_bonds(const void *a, const void *b)
+{
+	bond **aa = (bond **) a;
+    bond **bb = (bond **) b;
+    double za = ((*aa)->a1->z + (*aa)->a2->z) / 2;
+    double zb = ((*bb)->a1->z + (*bb)->a2->z) / 2;
+    return (za > zb) - (za < zb);
+}
