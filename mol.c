@@ -192,6 +192,63 @@ void molsort(molecule *molecule)
     qsort(molecule->bond_ptrs, molecule->bond_no, sizeof(bond *), cmp_bonds);
 }
 
+void xrotation(xform_matrix xform_matrix, unsigned short deg)
+{
+    double rad = deg * M_PI / 180.0; // convert degrees to radians
+    double s = sin(rad);
+    double c = cos(rad);
+    xform_matrix[0][0] = 1.0;
+    xform_matrix[0][1] = 0.0;
+    xform_matrix[0][2] = 0.0;
+    xform_matrix[1][0] = 0.0;
+    xform_matrix[1][1] = c;
+    xform_matrix[1][2] = -s;
+    xform_matrix[2][0] = 0.0;
+    xform_matrix[2][1] = s;
+    xform_matrix[2][2] = c;
+}
+
+void yrotation(xform_matrix xform_matrix, unsigned short deg)
+{
+    double radians = (deg * M_PI) / 180; // convert deg to radians
+    xform_matrix[0][0] = cos(radians);
+    xform_matrix[0][1] = 0;
+    xform_matrix[0][2] = -sin(radians);
+    xform_matrix[1][0] = 0;
+    xform_matrix[1][1] = 1;
+    xform_matrix[1][2] = 0;
+    xform_matrix[2][0] = sin(radians);
+    xform_matrix[2][1] = 0;
+    xform_matrix[2][2] = cos(radians);
+}
+
+void zrotation(xform_matrix xform_matrix, unsigned short deg)
+{
+    double radians = (deg * M_PI) / 180; // convert deg to radians
+    xform_matrix[0][0] = cos(radians);
+    xform_matrix[0][1] = -sin(radians);
+    xform_matrix[0][2] = 0;
+    xform_matrix[1][0] = sin(radians);
+    xform_matrix[1][1] = cos(radians);
+    xform_matrix[1][2] = 0;
+    xform_matrix[2][0] = 0;
+    xform_matrix[2][1] = 0;
+    xform_matrix[2][2] = 1;
+}
+
+void mol_xform(molecule *molecule, xform_matrix matrix)
+{
+    for (int i = 0; i < molecule->atom_no; i++) {
+        double x = molecule->atoms[i].x;
+        double y = molecule->atoms[i].y;
+        double z = molecule->atoms[i].z;
+
+        molecule->atoms[i].x = matrix[0][0] * x + matrix[0][1] * y + matrix[0][2] * z;
+        molecule->atoms[i].y = matrix[1][0] * x + matrix[1][1] * y + matrix[1][2] * z;
+        molecule->atoms[i].z = matrix[2][0] * x + matrix[2][1] * y + matrix[2][2] * z;
+    }
+}
+
 int cmp_atoms(const void *a, const void *b)
 {
     atom **aa = (atom **) a;

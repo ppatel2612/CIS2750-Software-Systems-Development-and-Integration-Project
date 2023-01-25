@@ -3,10 +3,13 @@
 #ifndef __PPATEL36__A1H__
 #define __PPATEL36__A1H__
 
+#define M_PI 3.14159265358979323846
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
+#include <math.h>
 
 typedef struct atom						//atom defines a structure that represents an atom and its position in 3D space
 {
