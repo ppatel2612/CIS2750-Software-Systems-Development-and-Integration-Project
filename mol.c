@@ -7,10 +7,12 @@ void atomset(atom *atom, char element[3], double *x, double *y, double *z)
     /*  
      *  Copy the values pointed to by the arguments into the atom stored at atom.
      */
-	strncpy(atom->element, element, 3);     // Uses strncpy to copy over the string as it specifies atom maximum length
-    atom->x = *x;       // Copy over the values POINTED TO by arguments
-    atom->y = *y;       // """
-    atom->z = *z;       // """
+	for (int i = 0; i < 3; i++) {
+        atom->element[i] = element[i];
+    }
+    atom->x = *x;
+    atom->y = *y;
+    atom->z = *z;
 }
 
 void atomget(atom *atom, char element[3], double *x, double *y, double *z)
@@ -18,10 +20,12 @@ void atomget(atom *atom, char element[3], double *x, double *y, double *z)
     /*
     * Copy the values in the atom stored at atom to the locations pointed to by element, x, y, and z
     */
-	strncpy(element, atom->element, 3);     // Uses strncpy to copy over the string as it specifies atom maximum length
-    *x = atom->x;       // Copy over the values POINTED TO by the elements
-    *y = atom->y;       // """
-    *z = atom->z;       // """
+	for (int i = 0; i < 3; i++) {
+        element[i] = atom->element[i];
+    }
+    *x = atom->x;
+    *y = atom->y;
+    *z = atom->z;
 }
 
 void bondset(bond *bond, atom *a1, atom *a2, unsigned char epairs)
@@ -46,50 +50,50 @@ void bondget(bond *bond, atom **a1, atom **a2, unsigned char *epairs)
 
 molecule *molmalloc(unsigned short atom_max, unsigned short bond_max)
 {
-	molecule *mol = (molecule *)malloc(sizeof(molecule));       // Allocate memory for atom 'molecule' structure
+    molecule *mol = malloc(sizeof(molecule));       // Allocate memory for atom 'molecule' structure
     if (mol == NULL) 
     {      // Check if memory allocation failed
-        return NULL;        // malloc failed
+        printf("Error in function 'molmalloc': Failed to allocate memory for mol structure.\n");
+        exit(1);
     }
 
     mol->atom_max = atom_max;       // Set the value of atom_max in the structure to the value specified in the argument
     mol->atom_no = 0;       // Set the value of atom_no in the structure to zero
     
-    mol->atoms = (atom *)malloc(sizeof(atom) * atom_max);       // Allocate memory for array 'atoms' to hold atom_max atoms
+    mol->atoms = malloc(sizeof(atom) * atom_max);       // Allocate memory for array 'atoms' to hold atom_max atoms
     if (mol->atoms == NULL) 
     {      // Check if memory allocation failed
-        free(mol);      // Frees mol structure to ensure no memory errors
-        return NULL;        // malloc failed
+        printf("Error in function 'molmalloc': Failed to allocate memory for mol->atoms array.\n");
+        exit(1);
     }
+    memset(mol->atoms, 0, sizeof(atom) * atom_max);
 
-    mol->atom_ptrs = (atom **)malloc(sizeof(atom *) * atom_max);        // Allocate memory for array 'atom_ptrs'
+    mol->atom_ptrs = malloc(sizeof(atom *) * atom_max);        // Allocate memory for array 'atom_ptrs'
     if (mol->atom_ptrs == NULL) 
     {      // Check if memory allocation failed
-        free(mol->atoms);       // Frees array in struct before freeing struct to ensure all memory is freed 
-        free(mol);      // Frees mol structure to ensure no memory errors
-        return NULL;        // malloc failed
+        printf("Error in function 'molmalloc': Failed to allocate memory for mol->atom_ptrs array.\n");
+        exit(1);;        // malloc failed
     }
+    memset(mol->atom_ptrs, 0, sizeof(atom *) * atom_max);
 
     mol->bond_max = bond_max;       // Set the value of bond_max in the structure to the value specified in the argument
     mol->bond_no = 0;       // Set the value of bond_no in the structure to zero
 
-    mol->bonds = (bond *)malloc(sizeof(bond) * bond_max);       // Allocate memory for array 'bonds' to hold bond_max bonds
+    mol->bonds = malloc(sizeof(bond) * bond_max);       // Allocate memory for array 'bonds' to hold bond_max bonds
     if (mol->bonds == NULL) 
     {       // Check if memory allocation failed
-        free(mol->atoms);       // Frees all allocated memory in the structure to ensure no memory errors
-        free(mol->atom_ptrs);   // "'"
-        free(mol);              // "'"
-        return NULL;        // malloc failed
+        printf("Error in function 'molmalloc': Failed to allocate memory for mol->bonds array.\n");
+        exit(1);
     }
-    mol->bond_ptrs = (bond **)malloc(sizeof(bond *) * bond_max);        // Allocates memory for array 'bond_ ptrs' NOTE: its **
+    memset(mol->bonds, 0, sizeof(bond) * bond_max);
+
+    mol->bond_ptrs = malloc(sizeof(bond *) * bond_max);        // Allocates memory for array 'bond_ ptrs' NOTE: its **
     if (mol->bond_ptrs == NULL) 
     {       // Check if memory allocation failed
-        free(mol->atoms);       // Frees all allocated memory in the structure to ensure no memory errors
-        free(mol->atom_ptrs);
-        free(mol->bonds);
-        free(mol);
-        return NULL;        // malloc failed
+        printf("Error in function 'molmalloc': Failed to allocate memory for mol->bond_ptrs array.\n");
+        exit(1);
     }
+    memset(mol->bond_ptrs, 0, sizeof(bond *) * bond_max);
 
     return mol;     // Returns the address of the malloced memory for the molecule
 }
@@ -142,21 +146,24 @@ void molappend_atom(molecule *molecule, atom *atom)
 {
     if( molecule->atom_no == molecule->atom_max) {
         molecule->atom_max *= 2;
-        if( molecule->atom_max == 0 )
+        if( molecule->atom_max == 0 ) {
             molecule->atom_max = 1;
-
-        molecule->atoms = realloc( molecule->atoms, molecule->atom_max * sizeof *molecule->atoms );
+        }
+        molecule->atoms = realloc( molecule->atoms, molecule->atom_max * (sizeof *molecule->atoms) );
         if (molecule->atoms == NULL) {
             printf("Error: realloc failed to allocate memory for atoms\n");
             exit(1);
         }
-        molecule->atom_ptrs = realloc( molecule->atom_ptrs, molecule->atom_max * sizeof *molecule->atom_ptrs );
+        molecule->atom_ptrs = realloc( molecule->atom_ptrs, molecule->atom_max * (sizeof *molecule->atom_ptrs) );
         if (molecule->atom_ptrs == NULL) {
             printf("Error: realloc failed to allocate memory for atom_ptrs\n");
             exit(1);
         }
+        // reassign the atom_ptrs to point to the new location of the atoms struct
+        for (int i = 0; i < molecule->atom_no; i++) {
+            molecule->atom_ptrs[i] = &molecule->atoms[i];
+        }
     }
-
     molecule->atoms[molecule->atom_no] = *atom;
     molecule->atom_ptrs[molecule->atom_no] = &molecule->atoms[molecule->atom_no];
     molecule->atom_no++;
@@ -164,20 +171,25 @@ void molappend_atom(molecule *molecule, atom *atom)
 
 void molappend_bond(molecule *molecule, bond *bond)
 {
-    if( molecule->bond_no == molecule->bond_max) {
+    if( molecule->bond_no >= molecule->bond_max) {
         molecule->bond_max *= 2;
-        if( molecule->bond_max == 0 )
+        if( molecule->bond_max == 0 ) {
             molecule->bond_max = 1;
+        }
 
-        molecule->bonds = realloc( molecule->bonds, molecule->bond_max * sizeof *molecule->bonds );
+        molecule->bonds = realloc( molecule->bonds, molecule->bond_max * (sizeof *molecule->bonds) );
         if (molecule->bonds == NULL) {
             printf("Error: realloc failed to allocate memory for bonds\n");
             exit(1);
         }
-        molecule->bond_ptrs = realloc( molecule->bond_ptrs, molecule->bond_max * sizeof *molecule->bond_ptrs );
+        molecule->bond_ptrs = realloc( molecule->bond_ptrs, molecule->bond_max * (sizeof *molecule->bond_ptrs) );
         if (molecule->bond_ptrs == NULL) {
             printf("Error: realloc failed to allocate memory for bond_ptrs\n");
             exit(1);
+        }
+
+        for (int i = 0; i < molecule->bond_no; i++) {
+            molecule->bond_ptrs[i] = &molecule->bonds[i];
         }
     }
 
@@ -194,42 +206,48 @@ void molsort(molecule *molecule)
 
 void xrotation(xform_matrix xform_matrix, unsigned short deg)
 {
-    double rad = deg * M_PI / 180.0; // convert degrees to radians
-    double s = sin(rad);
-    double c = cos(rad);
+    double rad = deg * M_PI / 180.0; // convert degrees to rad
+    double sine = sin(rad);
+    double cosine = cos(rad);
     xform_matrix[0][0] = 1.0;
     xform_matrix[0][1] = 0.0;
     xform_matrix[0][2] = 0.0;
     xform_matrix[1][0] = 0.0;
-    xform_matrix[1][1] = c;
-    xform_matrix[1][2] = -s;
+    xform_matrix[1][1] = cosine;
+    xform_matrix[1][2] = -sine;
     xform_matrix[2][0] = 0.0;
-    xform_matrix[2][1] = s;
-    xform_matrix[2][2] = c;
+    xform_matrix[2][1] = sine;
+    xform_matrix[2][2] = cosine;
 }
 
 void yrotation(xform_matrix xform_matrix, unsigned short deg)
 {
-    double radians = (deg * M_PI) / 180; // convert deg to radians
-    xform_matrix[0][0] = cos(radians);
+    double rad = (deg * M_PI) / 180; // convert deg to rad
+    double sine = sin(rad);
+    double cosine = cos(rad);
+
+    xform_matrix[0][0] = cosine;
     xform_matrix[0][1] = 0;
-    xform_matrix[0][2] = -sin(radians);
+    xform_matrix[0][2] = sine;
     xform_matrix[1][0] = 0;
     xform_matrix[1][1] = 1;
     xform_matrix[1][2] = 0;
-    xform_matrix[2][0] = sin(radians);
+    xform_matrix[2][0] = -sine;
     xform_matrix[2][1] = 0;
-    xform_matrix[2][2] = cos(radians);
+    xform_matrix[2][2] = cosine;
 }
 
 void zrotation(xform_matrix xform_matrix, unsigned short deg)
 {
-    double radians = (deg * M_PI) / 180; // convert deg to radians
-    xform_matrix[0][0] = cos(radians);
-    xform_matrix[0][1] = -sin(radians);
+    double rad = (deg * M_PI) / 180; // convert deg to rad
+    double sine = sin(rad);
+    double cosine = cos(rad);
+
+    xform_matrix[0][0] = cosine;
+    xform_matrix[0][1] = -sine;
     xform_matrix[0][2] = 0;
-    xform_matrix[1][0] = sin(radians);
-    xform_matrix[1][1] = cos(radians);
+    xform_matrix[1][0] = sine;
+    xform_matrix[1][1] = cosine;
     xform_matrix[1][2] = 0;
     xform_matrix[2][0] = 0;
     xform_matrix[2][1] = 0;
@@ -238,7 +256,8 @@ void zrotation(xform_matrix xform_matrix, unsigned short deg)
 
 void mol_xform(molecule *molecule, xform_matrix matrix)
 {
-    for (int i = 0; i < molecule->atom_no; i++) {
+    for (int i = 0; i < molecule->atom_no; i++) 
+    {
         double x = molecule->atoms[i].x;
         double y = molecule->atoms[i].y;
         double z = molecule->atoms[i].z;
@@ -251,16 +270,16 @@ void mol_xform(molecule *molecule, xform_matrix matrix)
 
 int cmp_atoms(const void *a, const void *b)
 {
-    atom **aa = (atom **) a;
-    atom **bb = (atom **) b;
-    return ((*aa)->z > (*bb)->z) - ((*aa)->z < (*bb)->z);
+    atom **A = (atom **) a;
+    atom **B = (atom **) b;
+    return ((*A)->z > (*B)->z) - ((*A)->z < (*B)->z);
 }
 
 int cmp_bonds(const void *a, const void *b)
 {
-	bond **aa = (bond **) a;
-    bond **bb = (bond **) b;
-    double za = ((*aa)->a1->z + (*aa)->a2->z) / 2;
-    double zb = ((*bb)->a1->z + (*bb)->a2->z) / 2;
+	bond **A = (bond **) a;
+    bond **B = (bond **) b;
+    double za = ((*A)->a1->z + (*A)->a2->z) / 2;
+    double zb = ((*B)->a1->z + (*B)->a2->z) / 2;
     return (za > zb) - (za < zb);
 }

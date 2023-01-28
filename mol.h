@@ -13,22 +13,22 @@
 
 typedef struct atom						//atom defines a structure that represents an atom and its position in 3D space
 {
-char element[3];						//element is a null-terminated string representing the name of the element (e.g. "Na" for sodium)
-double x, y, z;							//Double precision floating point values describing the position in Angstroms of the atom relative to a common origin for a molecule
+	char element[3];						//element is a null-terminated string representing the name of the element (e.g. "Na" for sodium)
+	double x, y, z;							//Double precision floating point values describing the position in Angstroms of the atom relative to a common origin for a molecule
 } atom;
 
 typedef struct bond						//bond defines a structure that represents a co-valent bond between two atoms
 {
-atom *a1, *a2;							//a1 and a2 are pointers to the two atoms in the co-valent bond (Don't need to free a1 and a2 since they are stored  elsewhere)
-unsigned char epairs;					//epairs is the number of electron pairs in the co-valent bond (i.e. epairs = 2 represents a double bond)
+	atom *a1, *a2;							//a1 and a2 are pointers to the two atoms in the co-valent bond (Don't need to free a1 and a2 since they are stored  elsewhere)
+	unsigned char epairs;					//epairs is the number of electron pairs in the co-valent bond (i.e. epairs = 2 represents a double bond)
 } bond;
 
 typedef struct molecule					//molecule represents a molecule which consists of zero or more atoms, and zero or more bonds.
 {
-unsigned short atom_max, atom_no;		//atom_max is a non-negative integer that records the dimensionality of an array pointed to by atoms
-atom *atoms, **atom_ptrs;				//atom_no is the number of atoms currently stored in the array atoms || atom_max >= atom_no
-unsigned short bond_max, bond_no;		//bond_max is a non-negative integer that records the dimensionality of an array pointed to by bonds
-bond *bonds, **bond_ptrs;				//bond_no is the number of bonds currently stored in the array bonds || bond_max >= bond_no
+	unsigned short atom_max, atom_no;		//atom_max is a non-negative integer that records the dimensionality of an array pointed to by atoms
+	atom *atoms, **atom_ptrs;				//atom_no is the number of atoms currently stored in the array atoms || atom_max >= atom_no
+	unsigned short bond_max, bond_no;		//bond_max is a non-negative integer that records the dimensionality of an array pointed to by bonds
+	bond *bonds, **bond_ptrs;				//bond_no is the number of bonds currently stored in the array bonds || bond_max >= bond_no
 } molecule;								//atom_ptrs and bond_ptrs are arrays of pointers. Their dimensionalities will correspond to the atoms and bonds arrays, respectively
 //These pointers in these pointer arrays will be initialized to point to their corresponding structures. E.g. atom_ptrs[0] will point to atoms[0].
 
