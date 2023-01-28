@@ -7,9 +7,10 @@ void atomset(atom *atom, char element[3], double *x, double *y, double *z)
     /*  
      *  Copy the values pointed to by the arguments into the atom stored at atom.
      */
-	for (int i = 0; i < 3; i++) {
-        atom->element[i] = element[i];
-    }
+	// for (int i = 0; i < 3; i++) {
+    //     atom->element[i] = element[i];
+    // }
+    strncpy(atom->element, element, 3);
     atom->x = *x;
     atom->y = *y;
     atom->z = *z;
@@ -20,9 +21,10 @@ void atomget(atom *atom, char element[3], double *x, double *y, double *z)
     /*
     * Copy the values in the atom stored at atom to the locations pointed to by element, x, y, and z
     */
-	for (int i = 0; i < 3; i++) {
-        element[i] = atom->element[i];
-    }
+	// for (int i = 0; i < 3; i++) {
+    //     element[i] = atom->element[i];
+    // }
+    strncpy(element, atom->element, 3);
     *x = atom->x;
     *y = atom->y;
     *z = atom->z;
@@ -104,10 +106,10 @@ molecule *molcopy(molecule *src)
     molecule *new_mol = molmalloc(src->atom_max, src->bond_max);
 
     // Copy values of atom_max, atom_no, bond_max, bond_no from src to new_mol
-    new_mol->atom_max = src->atom_max;
-    new_mol->atom_no = src->atom_no;
-    new_mol->bond_max = src->bond_max;
-    new_mol->bond_no = src->bond_no;
+    // new_mol->atom_max = src->atom_max;
+    // new_mol->atom_no = src->atom_no;
+    // new_mol->bond_max = src->bond_max;
+    // new_mol->bond_no = src->bond_no;
 
     // Allocate memory for atoms and atom_ptrs arrays
     new_mol->atoms = malloc(sizeof(atom) * src->atom_max);

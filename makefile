@@ -14,9 +14,9 @@ libmol.so: mol.o
 mol.o: mol.c mol.h
 	$(CC) $(CFLAGS) -c mol.c -fPIC -o mol.o
 
-test1.o: test1.c mol.h
-	$(CC) $(CFLAGS) -c test1.c -o test1.o
+test3.o: test3.c mol.h
+	$(CC) $(CFLAGS) -c test3.c -o test3.o
 
-run: test1.o libmol.so
-	$(CC) test1.o -L. -lmol -g -o run
+run: test3.o libmol.so
+	$(CC) test3.o -L. -lmol -g -o run
 
