@@ -1,6 +1,6 @@
 Name: Pratham Patel			Course: CIS2750 		ID: ppatel36
 Student Number: 1140832		Date: 2023-01-31
-------------------------------------------------------------------------
+________________________________________________________________________
 To Run this program:
 	Ensure that the shared library can be found by the compiler.
 		In no machine, I used the terminal commands:
@@ -8,7 +8,7 @@ To Run this program:
 			export LD_LIBRARY_PATH
 		This would ensure that the compiler can find the shared library as we provided the file path to the shared library.
 	Next, in terminal, use the 'make all' command to create the necessary targets and files to run the program.
-------------------------------------------------------------------------
+________________________________________________________________________
 This is A1 for CIS2750 Winter 2023. It consists of 3 files; mol.c mol.h and makfile.
 
 MOL.H:	Contains all function prototypes, typedefs and structure definitions that are used in the libmol.so library.
