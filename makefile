@@ -19,4 +19,3 @@ test3.o: test3.c mol.h
 
 run: test3.o libmol.so
 	$(CC) test3.o -L. -lmol -o run -lm
-

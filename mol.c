@@ -4,7 +4,7 @@
 
 void atomset(atom *atom, char element[3], double *x, double *y, double *z)
 {
-    /*  
+    /*
      *  Copy the values pointed to by the arguments into the atom stored at atom.
      */
     strncpy(atom->element, element, 3);
@@ -19,7 +19,7 @@ void atomget(atom *atom, char element[3], double *x, double *y, double *z)
     * Copy the values in the atom stored at atom to the locations pointed to by element, x, y, and z
     */
     strncpy(element, atom->element, 3);
-    *x = atom->x;       
+    *x = atom->x;
     *y = atom->y;
     *z = atom->z;
 }
@@ -47,7 +47,7 @@ void bondget(bond *bond, atom **a1, atom **a2, unsigned char *epairs)
 molecule *molmalloc(unsigned short atom_max, unsigned short bond_max)
 {
     molecule *mol = malloc(sizeof(molecule));       // Allocate memory for atom 'molecule' structure
-    if (mol == NULL) 
+    if (mol == NULL)
     {      // Check if memory allocation failed
         printf("Error in function 'molmalloc': Failed to allocate memory for mol structure.\n");
         exit(1);
@@ -55,9 +55,9 @@ molecule *molmalloc(unsigned short atom_max, unsigned short bond_max)
 
     mol->atom_max = atom_max;       // Set the value of atom_max in the structure to the value specified in the argument
     mol->atom_no = 0;       // Set the value of atom_no in the structure to zero
-    
+
     mol->atoms = malloc(sizeof(atom) * atom_max);       // Allocate memory for array 'atoms' to hold atom_max atoms
-    if (mol->atoms == NULL) 
+    if (mol->atoms == NULL)
     {      // Check if memory allocation failed
         printf("Error in function 'molmalloc': Failed to allocate memory for mol->atoms array.\n");
         free(mol);
@@ -66,7 +66,7 @@ molecule *molmalloc(unsigned short atom_max, unsigned short bond_max)
     memset(mol->atoms, 0, sizeof(atom) * atom_max);
 
     mol->atom_ptrs = malloc(sizeof(atom *) * atom_max);        // Allocate memory for array 'atom_ptrs'
-    if (mol->atom_ptrs == NULL) 
+    if (mol->atom_ptrs == NULL)
     {      // Check if memory allocation failed
         printf("Error in function 'molmalloc': Failed to allocate memory for mol->atom_ptrs array.\n");
         free(mol->atoms);
@@ -79,7 +79,7 @@ molecule *molmalloc(unsigned short atom_max, unsigned short bond_max)
     mol->bond_no = 0;       // Set the value of bond_no in the structure to zero
 
     mol->bonds = malloc(sizeof(bond) * bond_max);       // Allocate memory for array 'bonds' to hold bond_max bonds
-    if (mol->bonds == NULL) 
+    if (mol->bonds == NULL)
     {       // Check if memory allocation failed
         printf("Error in function 'molmalloc': Failed to allocate memory for mol->bonds array.\n");
         free(mol->atom_ptrs);
@@ -90,7 +90,7 @@ molecule *molmalloc(unsigned short atom_max, unsigned short bond_max)
     memset(mol->bonds, 0, sizeof(bond) * bond_max);
 
     mol->bond_ptrs = malloc(sizeof(bond *) * bond_max);        // Allocates memory for array 'bond_ ptrs' NOTE: its **
-    if (mol->bond_ptrs == NULL) 
+    if (mol->bond_ptrs == NULL)
     {       // Check if memory allocation failed
         printf("Error in function 'molmalloc': Failed to allocate memory for mol->bond_ptrs array.\n");
         free(mol->bonds);
@@ -249,8 +249,8 @@ void zrotation(xform_matrix xform_matrix, unsigned short deg)
 
 void mol_xform(molecule *molecule, xform_matrix matrix)
 {
-    for (int i = 0; i < molecule->atom_no; i++) 
-    {   
+    for (int i = 0; i < molecule->atom_no; i++)
+    {
         // Iterates through all atoms in the molecule
         double x = molecule->atoms[i].x;
         double y = molecule->atoms[i].y;
