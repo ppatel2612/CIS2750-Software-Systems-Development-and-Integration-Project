@@ -1,7 +1,3 @@
-/**
- * using bits from whoever made test 5 on discord as well as test 1,2,3
- * Made by Daniel
- */
 #include "mol.h"
 
 #ifndef STDIO_H
