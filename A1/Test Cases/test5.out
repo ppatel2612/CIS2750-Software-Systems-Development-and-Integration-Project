@@ -1,0 +1,113 @@
+First atom
+atom_max: 4, atom_no: 3
+atom[0] 0xc653b0 O : 2.536900 -0.155000 1.000000
+atom[1] 0xc653d0 H : 3.073900 0.155000 0.500000
+atom[2] 0xc653f0 H : 2.000000 0.155000 1.500000
+atom_ptrs[0] 0xc653b0 O : 2.536900 -0.155000 1.000000
+atom_ptrs[1] 0xc653d0 H : 3.073900 0.155000 0.500000
+atom_ptrs[2] 0xc653f0 H : 2.000000 0.155000 1.500000
+bond_max: 2, bond_no: 2
+bond[0] 0xc652f0: 0xc653b0 0xc653d0 1
+bond[1] 0xc65308: 0xc653b0 0xc653f0 1
+bond_ptrs[0]: 0xc652f0
+bond_ptrs[1]: 0xc65308
+
+Copied molecule
+atom_max: 4, atom_no: 3
+atom[0] 0xc65480 O : 2.536900 -0.155000 1.000000
+atom[1] 0xc654a0 H : 3.073900 0.155000 0.500000
+atom[2] 0xc654c0 H : 2.000000 0.155000 1.500000
+atom_ptrs[0] 0xc65480 O : 2.536900 -0.155000 1.000000
+atom_ptrs[1] 0xc654a0 H : 3.073900 0.155000 0.500000
+atom_ptrs[2] 0xc654c0 H : 2.000000 0.155000 1.500000
+bond_max: 2, bond_no: 2
+bond[0] 0xc65510: 0xc65480 0xc654a0 1
+bond[1] 0xc65528: 0xc65480 0xc654c0 1
+bond_ptrs[0]: 0xc65510
+bond_ptrs[1]: 0xc65528
+
+begin rotations and matrix transformations
+
+Molecule for x rotation
+
+Matrix: 
+	1.000000	0.000000	0.000000
+	0.000000	0.342020	-0.939693
+	0.000000	0.939693	0.342020
+
+atom_max: 4, atom_no: 3
+atom[0] 0xc653b0 O : 2.536900 -0.992706 0.196368
+atom[1] 0xc653d0 H : 3.073900 -0.416833 0.316662
+atom[2] 0xc653f0 H : 2.000000 -1.356526 0.658683
+atom_ptrs[0] 0xc653b0 O : 2.536900 -0.992706 0.196368
+atom_ptrs[1] 0xc653d0 H : 3.073900 -0.416833 0.316662
+atom_ptrs[2] 0xc653f0 H : 2.000000 -1.356526 0.658683
+bond_max: 2, bond_no: 2
+bond[0] 0xc652f0: 0xc653b0 0xc653d0 1
+bond[1] 0xc65308: 0xc653b0 0xc653f0 1
+bond_ptrs[0]: 0xc652f0
+bond_ptrs[1]: 0xc65308
+
+Second molecule, y rotation
+
+Matrix: 
+	1.000000	0.000000	0.000000
+	0.000000	0.342020	-0.939693
+	0.000000	0.939693	0.342020
+
+Matrix: 
+	0.342020	0.000000	0.939693
+	0.000000	1.000000	0.000000
+	-0.939693	0.000000	0.342020
+
+atom_max: 4, atom_no: 3
+atom[0] 0xc653b0 O : 1.052196 -0.992706 -2.316744
+atom[1] 0xc653d0 H : 1.348901 -0.416833 -2.780216
+atom[2] 0xc653f0 H : 1.302999 -1.356526 -1.654103
+atom_ptrs[0] 0xc653b0 O : 1.052196 -0.992706 -2.316744
+atom_ptrs[1] 0xc653d0 H : 1.348901 -0.416833 -2.780216
+atom_ptrs[2] 0xc653f0 H : 1.302999 -1.356526 -1.654103
+bond_max: 2, bond_no: 2
+bond[0] 0xc652f0: 0xc653b0 0xc653d0 1
+bond[1] 0xc65308: 0xc653b0 0xc653f0 1
+bond_ptrs[0]: 0xc652f0
+bond_ptrs[1]: 0xc65308
+
+Second molecule, z rotation
+
+Matrix: 
+	0.342020	0.000000	0.939693
+	0.000000	1.000000	0.000000
+	-0.939693	0.000000	0.342020
+
+Matrix: 
+	0.342020	-0.939693	0.000000
+	0.939693	0.342020	0.000000
+	0.000000	0.000000	1.000000
+
+atom_max: 4, atom_no: 3
+atom[0] 0xc653b0 O : 1.292711 0.649216 -2.316744
+atom[1] 0xc653d0 H : 0.853046 1.124987 -2.780216
+atom[2] 0xc653f0 H : 1.720369 0.760460 -1.654103
+atom_ptrs[0] 0xc653b0 O : 1.292711 0.649216 -2.316744
+atom_ptrs[1] 0xc653d0 H : 0.853046 1.124987 -2.780216
+atom_ptrs[2] 0xc653f0 H : 1.720369 0.760460 -1.654103
+bond_max: 2, bond_no: 2
+bond[0] 0xc652f0: 0xc653b0 0xc653d0 1
+bond[1] 0xc65308: 0xc653b0 0xc653f0 1
+bond_ptrs[0]: 0xc652f0
+bond_ptrs[1]: 0xc65308
+
+Sorting the original
+atom_max: 4, atom_no: 3
+atom[0] 0xc653b0 O : 1.292711 0.649216 -2.316744
+atom[1] 0xc653d0 H : 0.853046 1.124987 -2.780216
+atom[2] 0xc653f0 H : 1.720369 0.760460 -1.654103
+atom_ptrs[0] 0xc653d0 H : 0.853046 1.124987 -2.780216
+atom_ptrs[1] 0xc653b0 O : 1.292711 0.649216 -2.316744
+atom_ptrs[2] 0xc653f0 H : 1.720369 0.760460 -1.654103
+bond_max: 2, bond_no: 2
+bond[0] 0xc652f0: 0xc653b0 0xc653d0 1
+bond[1] 0xc65308: 0xc653b0 0xc653f0 1
+bond_ptrs[0]: 0xc652f0
+bond_ptrs[1]: 0xc65308
