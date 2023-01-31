@@ -1,5 +1,3 @@
-//	Name: Pratham Patel			Course: CIS2750 		ID: ppatel36
-//	Student Number: 1140832		Date: 2023-01-31
 #ifndef __PPATEL36__A1H__
 #define __PPATEL36__A1H__
 
