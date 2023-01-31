@@ -49,7 +49,6 @@ molecule *molmalloc(unsigned short atom_max, unsigned short bond_max)
     molecule *mol = malloc(sizeof(molecule));       // Allocate memory for atom 'molecule' structure
     if (mol == NULL)
     {      // Check if memory allocation failed
-        // printf("Error in function 'molmalloc': Failed to allocate memory for mol structure.\n");
         return NULL;
     }
 
@@ -59,8 +58,6 @@ molecule *molmalloc(unsigned short atom_max, unsigned short bond_max)
     mol->atoms = malloc(sizeof(atom) * atom_max);       // Allocate memory for array 'atoms' to hold atom_max atoms
     if (mol->atoms == NULL)
     {      // Check if memory allocation failed
-        // printf("Error in function 'molmalloc': Failed to allocate memory for mol->atoms array.\n");
-        // free(mol);
         return NULL;
     }
     memset(mol->atoms, 0, sizeof(atom) * atom_max);
@@ -68,9 +65,6 @@ molecule *molmalloc(unsigned short atom_max, unsigned short bond_max)
     mol->atom_ptrs = malloc(sizeof(atom *) * atom_max);        // Allocate memory for array 'atom_ptrs'
     if (mol->atom_ptrs == NULL)
     {      // Check if memory allocation failed
-        // printf("Error in function 'molmalloc': Failed to allocate memory for mol->atom_ptrs array.\n");
-        // free(mol->atoms);
-        // free(mol);
         return NULL;       // malloc failed
     }
     memset(mol->atom_ptrs, 0, sizeof(atom *) * atom_max);
@@ -81,10 +75,6 @@ molecule *molmalloc(unsigned short atom_max, unsigned short bond_max)
     mol->bonds = malloc(sizeof(bond) * bond_max);       // Allocate memory for array 'bonds' to hold bond_max bonds
     if (mol->bonds == NULL)
     {       // Check if memory allocation failed
-        // printf("Error in function 'molmalloc': Failed to allocate memory for mol->bonds array.\n");
-        // free(mol->atom_ptrs);
-        // free(mol->atoms);
-        // free(mol);
         return NULL;
     }
     memset(mol->bonds, 0, sizeof(bond) * bond_max);
@@ -92,11 +82,6 @@ molecule *molmalloc(unsigned short atom_max, unsigned short bond_max)
     mol->bond_ptrs = malloc(sizeof(bond *) * bond_max);        // Allocates memory for array 'bond_ ptrs' NOTE: its **
     if (mol->bond_ptrs == NULL)
     {       // Check if memory allocation failed
-        // printf("Error in function 'molmalloc': Failed to allocate memory for mol->bond_ptrs array.\n");
-        // free(mol->bonds);
-        // free(mol->atom_ptrs);
-        // free(mol->atoms);
-        // free(mol);
         return NULL;
     }
     memset(mol->bond_ptrs, 0, sizeof(bond *) * bond_max);
@@ -123,6 +108,24 @@ molecule *molcopy(molecule *src)
         molappend_bond(new_mol, &src->bonds[i]);
     }
 
+    // Reassign atom pointers in bonds to point to new atoms
+    for (int i = 0; i < new_mol->bond_no; i++)
+    {
+        bond *b = new_mol->bonds + i;
+        for (int j = 0; j < src->atom_no; j++)
+        {
+            atom *a = src->atoms + j;
+            if (b->a1 == a)
+            {
+                b->a1 = new_mol->atoms + j;
+            }
+            if (b->a2 == a)
+            {
+                b->a2 = new_mol->atoms + j;
+            }
+        }
+    }
+
     return new_mol;
 }
 
@@ -145,6 +148,8 @@ void molappend_atom(molecule *molecule, atom *atom)
         if( molecule->atom_max == 0 ) {
             molecule->atom_max = 1;
         }
+
+        // Reallocate memory for the new atoms || Exits if memory allocation fails
         molecule->atoms = realloc( molecule->atoms, molecule->atom_max * (sizeof *molecule->atoms) );       // Gets more memory for new atom
         if (molecule->atoms == NULL) {
             printf("Error: realloc failed to allocate memory for atoms\n");
@@ -174,6 +179,7 @@ void molappend_bond(molecule *molecule, bond *bond)
             molecule->bond_max = 1;
         }
 
+        // Reallocate memory for new bonds || Exits if memory allocation fails
         molecule->bonds = realloc( molecule->bonds, molecule->bond_max * (sizeof *molecule->bonds) );
         if (molecule->bonds == NULL) {
             printf("Error: realloc failed to allocate memory for bonds\n");
@@ -278,7 +284,9 @@ int cmp_bonds(const void *a, const void *b)
 {
 	bond **A = (bond **) a;
     bond **B = (bond **) b;
-    double za = ((*A)->a1->z + (*A)->a2->z) / 2;
+    double za = ((*A)->a1->z + (*A)->a2->z) / 2;        // Computes avg
     double zb = ((*B)->a1->z + (*B)->a2->z) / 2;
     return (za > zb) - (za < zb);
 }
+
+

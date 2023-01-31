@@ -53,3 +53,4 @@ int cmp_atoms(const void *a, const void *b);										//Helper function for sort
 int cmp_bonds(const void *a, const void *b);										//Helper function for sorting bond pointers
 
 #endif
+
