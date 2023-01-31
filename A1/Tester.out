@@ -1,0 +1,269 @@
+Setting up atoms
+ a[i]'s setup: 0 1 2 3 4 5 6 7 
+Setting up bonds
+ b[i] setup: 0 1 2 3 
+malloc and free a molecule with [2,2]
+malloc and free a molecule with [0,0]
+malloc molecule[2,2], add [2,2] - bond will be duplicate
+atom_max: 2, atom_no: 2
+atom[0] 0x4bae540 H : 0.000000 0.000000 1.000000
+atom[1] 0x4bae560 a : 1.000000 1.000000 1.000000
+atom_ptrs[0] 0x4bae540 H : 0.000000 0.000000 1.000000
+atom_ptrs[1] 0x4bae560 a : 1.000000 1.000000 1.000000
+bond_max: 2, bond_no: 2
+bond[0] 0x4bae610: 0x4bae540 0x4bae560 97
+bond[1] 0x4bae628: 0x4bae540 0x4bae560 97
+bond_ptrs[0]: 0x4bae610
+bond_ptrs[1]: 0x4bae628
+malloc molecule[2,2], add [8,4]
+added atoms. added bonds. 
+atom_max: 8, atom_no: 8
+atom[0] 0x4bae9f0 H : 0.000000 0.000000 1.000000
+atom[1] 0x4baea10 a : 1.000000 1.000000 1.000000
+atom[2] 0x4baea30   : -3.834500 2.696900 -0.001000
+atom[3] 0x4baea50 LO: 0.000000 0.000000 0.000000
+atom[4] 0x4baea70 NG: -1.000000 -1.000000 -1.000000
+atom[5] 0x4baea90   : 0.748300 0.289500 0.127400
+atom[6] 0x4baeab0 B : 123.000000 456.000000 789.000000
+atom[7] 0x4baead0 ay: -0.001000 0.230000 -789.000000
+atom_ptrs[0] 0x4bae9f0 H : 0.000000 0.000000 1.000000
+atom_ptrs[1] 0x4baea10 a : 1.000000 1.000000 1.000000
+atom_ptrs[2] 0x4baea30   : -3.834500 2.696900 -0.001000
+atom_ptrs[3] 0x4baea50 LO: 0.000000 0.000000 0.000000
+atom_ptrs[4] 0x4baea70 NG: -1.000000 -1.000000 -1.000000
+atom_ptrs[5] 0x4baea90   : 0.748300 0.289500 0.127400
+atom_ptrs[6] 0x4baeab0 B : 123.000000 456.000000 789.000000
+atom_ptrs[7] 0x4baead0 ay: -0.001000 0.230000 -789.000000
+bond_max: 4, bond_no: 4
+bond[0] 0x4baebb0: 0x4bae9f0 0x4baea10 97
+bond[1] 0x4baebc8: 0x4baea30 0x4baea50 98
+bond[2] 0x4baebe0: 0x4baea70 0x4baea90 99
+bond[3] 0x4baebf8: 0x4baeab0 0x4baead0 100
+bond_ptrs[0]: 0x4baebb0
+bond_ptrs[1]: 0x4baebc8
+bond_ptrs[2]: 0x4baebe0
+bond_ptrs[3]: 0x4baebf8
+malloc molecule[0,0], add [8,4]
+added atoms. added bonds. 
+atom_max: 8, atom_no: 8
+atom[0] 0x4baefd0 H : 0.000000 0.000000 1.000000
+atom[1] 0x4baeff0 a : 1.000000 1.000000 1.000000
+atom[2] 0x4baf010   : -3.834500 2.696900 -0.001000
+atom[3] 0x4baf030 LO: 0.000000 0.000000 0.000000
+atom[4] 0x4baf050 NG: -1.000000 -1.000000 -1.000000
+atom[5] 0x4baf070   : 0.748300 0.289500 0.127400
+atom[6] 0x4baf090 B : 123.000000 456.000000 789.000000
+atom[7] 0x4baf0b0 ay: -0.001000 0.230000 -789.000000
+atom_ptrs[0] 0x4baefd0 H : 0.000000 0.000000 1.000000
+atom_ptrs[1] 0x4baeff0 a : 1.000000 1.000000 1.000000
+atom_ptrs[2] 0x4baf010   : -3.834500 2.696900 -0.001000
+atom_ptrs[3] 0x4baf030 LO: 0.000000 0.000000 0.000000
+atom_ptrs[4] 0x4baf050 NG: -1.000000 -1.000000 -1.000000
+atom_ptrs[5] 0x4baf070   : 0.748300 0.289500 0.127400
+atom_ptrs[6] 0x4baf090 B : 123.000000 456.000000 789.000000
+atom_ptrs[7] 0x4baf0b0 ay: -0.001000 0.230000 -789.000000
+bond_max: 4, bond_no: 4
+bond[0] 0x4baf190: 0x4baefd0 0x4baeff0 97
+bond[1] 0x4baf1a8: 0x4baf010 0x4baf030 98
+bond[2] 0x4baf1c0: 0x4baf050 0x4baf070 99
+bond[3] 0x4baf1d8: 0x4baf090 0x4baf0b0 100
+bond_ptrs[0]: 0x4baf190
+bond_ptrs[1]: 0x4baf1a8
+bond_ptrs[2]: 0x4baf1c0
+bond_ptrs[3]: 0x4baf1d8
+Creating and copying a molecule[0,0]
+Comparing molecules - any differences will be printed here:
+
+Creating and copying a molecule[2,2] with no bonds or atoms added
+Comparing molecules - any differences will be printed here:
+
+Creating and copying a molecule[2,2] with atoms
+Comparing molecules - any differences will be printed here:
+
+Creating and copying a molecule[2,2] with atoms and bonds
+Comparing molecules - any differences will be printed here:
+
+Creating and copying a molecule[0,0] with full atoms and bonds
+Comparing molecules - any differences will be printed here:
+
+Sorting a molecule[0,0]
+Sorting a molecule[1,0]
+atom_ptrs[0]  -> atom[0] H : 0.000000 0.000000 1.000000
+Sorting a molecule[2,0]
+atom_ptrs[0]  -> atom[0]   : -3.834500 2.696900 -0.001000
+atom_ptrs[1]  -> atom[1] H : 0.000000 0.000000 1.000000
+Sorting a molecule[2,1]
+atom_ptrs[0]  -> atom[1]   : -3.834500 2.696900 -0.001000
+atom_ptrs[1]  -> atom[0] H : 0.000000 0.000000 1.000000
+bond_ptrs[0]: 0x4bb0f50  -> bond[0] 0x4bb0f50: 0x4bb0e80(H) 0x4bb0ea0( ) 97
+Sorting a molecule[4,2]
+atom_ptrs[0]  -> atom[3] ay: -0.001000 0.230000 -789.000000
+atom_ptrs[1]  -> atom[1]   : -3.834500 2.696900 -0.001000
+atom_ptrs[2]  -> atom[0] H : 0.000000 0.000000 1.000000
+atom_ptrs[3]  -> atom[2] a : 1.000000 1.000000 1.000000
+bond_ptrs[0]: 0x4bb13d8  -> bond[0] 0x4bb13d8: 0x4bb1230(a) 0x4bb1250(ay) 98
+bond_ptrs[1]: 0x4bb13c0  -> bond[1] 0x4bb13c0: 0x4bb11f0(H) 0x4bb1210( ) 97
+Sorting a copied molecule[0,0]
+Original Molecule (unsorted)
+Copied Molecule (sorted)
+Sorting a copied molecule[2,1]
+Original Molecule (unsorted)
+atom_ptrs[0]  -> atom[0] H : 0.000000 0.000000 1.000000
+atom_ptrs[1]  -> atom[1]   : -3.834500 2.696900 -0.001000
+atom_ptrs[2]  -> atom[2] a : 1.000000 1.000000 1.000000
+atom_ptrs[3]  -> atom[3] ay: -0.001000 0.230000 -789.000000
+bond_ptrs[0]: 0x4bb1920  -> bond[0] 0x4bb1920: 0x4bb1750(H) 0x4bb1770( ) 97
+bond_ptrs[1]: 0x4bb1938  -> bond[1] 0x4bb1938: 0x4bb1790(a) 0x4bb17b0(ay) 98
+Copied Molecule (sorted)
+atom_ptrs[0]  -> atom[3] ay: -0.001000 0.230000 -789.000000
+atom_ptrs[1]  -> atom[1]   : -3.834500 2.696900 -0.001000
+atom_ptrs[2]  -> atom[0] H : 0.000000 0.000000 1.000000
+atom_ptrs[3]  -> atom[2] a : 1.000000 1.000000 1.000000
+bond_ptrs[0]: 0x4bb1b88  -> bond[0] 0x4bb1b88: 0x4bb1a90(a) 0x4bb1ab0(ay) 98
+bond_ptrs[1]: 0x4bb1b70  -> bond[1] 0x4bb1b70: 0x4bb1a50(H) 0x4bb1a70( ) 97
+Sorting a copied molecule[8,4]
+Original Molecule (unsorted)
+atom_ptrs[0]  -> atom[0] H : 0.000000 0.000000 1.000000
+atom_ptrs[1]  -> atom[1] a : 1.000000 1.000000 1.000000
+atom_ptrs[2]  -> atom[2]   : -3.834500 2.696900 -0.001000
+atom_ptrs[3]  -> atom[3] LO: 0.000000 0.000000 0.000000
+atom_ptrs[4]  -> atom[4] NG: -1.000000 -1.000000 -1.000000
+atom_ptrs[5]  -> atom[5]   : 0.748300 0.289500 0.127400
+atom_ptrs[6]  -> atom[6] B : 123.000000 456.000000 789.000000
+atom_ptrs[7]  -> atom[7] ay: -0.001000 0.230000 -789.000000
+bond_ptrs[0]: 0x4bb2270  -> bond[0] 0x4bb2270: 0x4bb1f40(H) 0x4bb1f60(a) 97
+bond_ptrs[1]: 0x4bb2288  -> bond[1] 0x4bb2288: 0x4bb1f80( ) 0x4bb1fa0(LO) 98
+bond_ptrs[2]: 0x4bb22a0  -> bond[2] 0x4bb22a0: 0x4bb1fc0(NG) 0x4bb1fe0( ) 99
+bond_ptrs[3]: 0x4bb22b8  -> bond[3] 0x4bb22b8: 0x4bb2000(B) 0x4bb2020(ay) 100
+Copied Molecule (sorted)
+atom_ptrs[0]  -> atom[7] ay: -0.001000 0.230000 -789.000000
+atom_ptrs[1]  -> atom[4] NG: -1.000000 -1.000000 -1.000000
+atom_ptrs[2]  -> atom[2]   : -3.834500 2.696900 -0.001000
+atom_ptrs[3]  -> atom[3] LO: 0.000000 0.000000 0.000000
+atom_ptrs[4]  -> atom[5]   : 0.748300 0.289500 0.127400
+atom_ptrs[5]  -> atom[0] H : 0.000000 0.000000 1.000000
+atom_ptrs[6]  -> atom[1] a : 1.000000 1.000000 1.000000
+atom_ptrs[7]  -> atom[6] B : 123.000000 456.000000 789.000000
+bond_ptrs[0]: 0x4bb25d0  -> bond[0] 0x4bb25d0: 0x4bb2460(NG) 0x4bb2480( ) 99
+bond_ptrs[1]: 0x4bb25b8  -> bond[1] 0x4bb25b8: 0x4bb2420( ) 0x4bb2440(LO) 98
+bond_ptrs[2]: 0x4bb25e8  -> bond[2] 0x4bb25e8: 0x4bb24a0(B) 0x4bb24c0(ay) 100
+bond_ptrs[3]: 0x4bb25a0  -> bond[3] 0x4bb25a0: 0x4bb23e0(H) 0x4bb2400(a) 97
+
+Rotations
+X rotations
+Before rotations
+atom_max: 8, atom_no: 8
+atom[0] 0x4bb2710 H : 0.000000 0.000000 1.000000
+atom[1] 0x4bb2730 a : 1.000000 1.000000 1.000000
+atom[2] 0x4bb2750   : -3.834500 2.696900 -0.001000
+atom[3] 0x4bb2770 LO: 0.000000 0.000000 0.000000
+atom[4] 0x4bb2790 NG: -1.000000 -1.000000 -1.000000
+atom[5] 0x4bb27b0   : 0.748300 0.289500 0.127400
+atom[6] 0x4bb27d0 B : 123.000000 456.000000 789.000000
+atom[7] 0x4bb27f0 ay: -0.001000 0.230000 -789.000000
+After rotating 10atom_max: 8, atom_no: 8
+atom[0] 0x4bb2710 H : 0.000000 -0.173648 0.984808
+atom[1] 0x4bb2730 a : 1.000000 0.811160 1.158456
+atom[2] 0x4bb2750   : -3.834500 2.656102 0.467327
+atom[3] 0x4bb2770 LO: 0.000000 0.000000 0.000000
+atom[4] 0x4bb2790 NG: -1.000000 -0.811160 -1.158456
+atom[5] 0x4bb27b0   : 0.748300 0.262979 0.175736
+atom[6] 0x4bb27d0 B : 123.000000 312.063923 856.196886
+atom[7] 0x4bb27f0 ay: -0.001000 137.234918 -776.973378
+Comparing rotations from applying 10 deg matrix 19 times and 190 deg rotation
+atom_max: 8, atom_no: 8
+atom[0] 0x4bb2710 H : 0.000000 0.173648 -0.984808
+atom[1] 0x4bb2730 a : 1.000000 -0.811160 -1.158456
+atom[2] 0x4bb2750   : -3.834500 -2.656102 -0.467327
+atom[3] 0x4bb2770 LO: 0.000000 0.000000 0.000000
+atom[4] 0x4bb2790 NG: -1.000000 0.811160 1.158456
+atom[5] 0x4bb27b0   : 0.748300 -0.262979 -0.175736
+atom[6] 0x4bb27d0 B : 123.000000 -312.063923 -856.196886
+atom[7] 0x4bb27f0 ay: -0.001000 -137.234918 776.973378
+atom_max: 8, atom_no: 8
+atom[0] 0x4bb2a40 H : 0.000000 0.173648 -0.984808
+atom[1] 0x4bb2a60 a : 1.000000 -0.811160 -1.158456
+atom[2] 0x4bb2a80   : -3.834500 -2.656102 -0.467327
+atom[3] 0x4bb2aa0 LO: 0.000000 0.000000 0.000000
+atom[4] 0x4bb2ac0 NG: -1.000000 0.811160 1.158456
+atom[5] 0x4bb2ae0   : 0.748300 -0.262979 -0.175736
+atom[6] 0x4bb2b00 B : 123.000000 -312.063923 -856.196886
+atom[7] 0x4bb2b20 ay: -0.001000 -137.234918 776.973378
+Y rotations
+Before rotations
+atom_max: 8, atom_no: 8
+atom[0] 0x4bb2d70 H : 0.000000 0.000000 1.000000
+atom[1] 0x4bb2d90 a : 1.000000 1.000000 1.000000
+atom[2] 0x4bb2db0   : -3.834500 2.696900 -0.001000
+atom[3] 0x4bb2dd0 LO: 0.000000 0.000000 0.000000
+atom[4] 0x4bb2df0 NG: -1.000000 -1.000000 -1.000000
+atom[5] 0x4bb2e10   : 0.748300 0.289500 0.127400
+atom[6] 0x4bb2e30 B : 123.000000 456.000000 789.000000
+atom[7] 0x4bb2e50 ay: -0.001000 0.230000 -789.000000
+After rotating 10atom_max: 8, atom_no: 8
+atom[0] 0x4bb2d70 H : 0.173648 0.000000 0.984808
+atom[1] 0x4bb2d90 a : 1.158456 1.000000 0.811160
+atom[2] 0x4bb2db0   : -3.776419 2.696900 0.664869
+atom[3] 0x4bb2dd0 LO: 0.000000 0.000000 0.000000
+atom[4] 0x4bb2df0 NG: -1.158456 -1.000000 -0.811160
+atom[5] 0x4bb2e10   : 0.759054 0.289500 -0.004476
+atom[6] 0x4bb2e30 B : 258.139766 456.000000 755.654591
+atom[7] 0x4bb2e50 ay: -137.009397 0.230000 -777.013143
+Comparing rotations from applying 10 deg matrix 19 times and 190 deg rotation
+atom_max: 8, atom_no: 8
+atom[0] 0x4bb2d70 H : -0.173648 0.000000 -0.984808
+atom[1] 0x4bb2d90 a : -1.158456 1.000000 -0.811160
+atom[2] 0x4bb2db0   : 3.776419 2.696900 -0.664869
+atom[3] 0x4bb2dd0 LO: 0.000000 0.000000 0.000000
+atom[4] 0x4bb2df0 NG: 1.158456 -1.000000 0.811160
+atom[5] 0x4bb2e10   : -0.759054 0.289500 0.004476
+atom[6] 0x4bb2e30 B : -258.139766 456.000000 -755.654591
+atom[7] 0x4bb2e50 ay: 137.009397 0.230000 777.013143
+atom_max: 8, atom_no: 8
+atom[0] 0x4bb30a0 H : -0.173648 0.000000 -0.984808
+atom[1] 0x4bb30c0 a : -1.158456 1.000000 -0.811160
+atom[2] 0x4bb30e0   : 3.776419 2.696900 -0.664869
+atom[3] 0x4bb3100 LO: 0.000000 0.000000 0.000000
+atom[4] 0x4bb3120 NG: 1.158456 -1.000000 0.811160
+atom[5] 0x4bb3140   : -0.759054 0.289500 0.004476
+atom[6] 0x4bb3160 B : -258.139766 456.000000 -755.654591
+atom[7] 0x4bb3180 ay: 137.009397 0.230000 777.013143
+Z rotations
+Before rotations
+atom_max: 8, atom_no: 8
+atom[0] 0x4bb33d0 H : 0.000000 0.000000 1.000000
+atom[1] 0x4bb33f0 a : 1.000000 1.000000 1.000000
+atom[2] 0x4bb3410   : -3.834500 2.696900 -0.001000
+atom[3] 0x4bb3430 LO: 0.000000 0.000000 0.000000
+atom[4] 0x4bb3450 NG: -1.000000 -1.000000 -1.000000
+atom[5] 0x4bb3470   : 0.748300 0.289500 0.127400
+atom[6] 0x4bb3490 B : 123.000000 456.000000 789.000000
+atom[7] 0x4bb34b0 ay: -0.001000 0.230000 -789.000000
+After rotating 10atom_max: 8, atom_no: 8
+atom[0] 0x4bb33d0 H : 0.000000 0.000000 1.000000
+atom[1] 0x4bb33f0 a : 0.811160 1.158456 1.000000
+atom[2] 0x4bb3410   : -4.244557 1.990074 -0.001000
+atom[3] 0x4bb3430 LO: 0.000000 0.000000 0.000000
+atom[4] 0x4bb3450 NG: -0.811160 -1.158456 -1.000000
+atom[5] 0x4bb3470   : 0.686660 0.415043 0.127400
+atom[6] 0x4bb3490 B : 41.947785 470.431061 789.000000
+atom[7] 0x4bb34b0 ay: -0.040924 0.226332 -789.000000
+Comparing rotations from applying 10 deg matrix 19 times and 190 deg rotation
+atom_max: 8, atom_no: 8
+atom[0] 0x4bb33d0 H : 0.000000 0.000000 1.000000
+atom[1] 0x4bb33f0 a : -0.811160 -1.158456 1.000000
+atom[2] 0x4bb3410   : 4.244557 -1.990074 -0.001000
+atom[3] 0x4bb3430 LO: 0.000000 0.000000 0.000000
+atom[4] 0x4bb3450 NG: 0.811160 1.158456 -1.000000
+atom[5] 0x4bb3470   : -0.686660 -0.415043 0.127400
+atom[6] 0x4bb3490 B : -41.947785 -470.431061 789.000000
+atom[7] 0x4bb34b0 ay: 0.040924 -0.226332 -789.000000
+atom_max: 8, atom_no: 8
+atom[0] 0x4bb3700 H : 0.000000 0.000000 1.000000
+atom[1] 0x4bb3720 a : -0.811160 -1.158456 1.000000
+atom[2] 0x4bb3740   : 4.244557 -1.990074 -0.001000
+atom[3] 0x4bb3760 LO: 0.000000 0.000000 0.000000
+atom[4] 0x4bb3780 NG: 0.811160 1.158456 -1.000000
+atom[5] 0x4bb37a0   : -0.686660 -0.415043 0.127400
+atom[6] 0x4bb37c0 B : -41.947785 -470.431061 789.000000
+atom[7] 0x4bb37e0 ay: 0.040924 -0.226332 -789.000000
