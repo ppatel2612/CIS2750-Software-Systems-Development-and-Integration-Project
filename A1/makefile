@@ -1,5 +1,3 @@
-#	Name: Pratham Patel			Course: CIS2750 		ID: ppatel36
-#	Student Number: 1140832		Date: 2023-01-31
 CC = clang
 CFLAGS = -Wall -std=c99 -pedantic
 
