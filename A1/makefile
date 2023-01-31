@@ -10,11 +10,11 @@ libmol.so: mol.o
 mol.o: mol.c mol.h
 	$(CC) $(CFLAGS) -c mol.c -fPIC -o mol.o
 	
-$(TestFile).o: $(TestFile).c mol.h
-	$(CC) $(CFLAGS) -c $(TestFile).c -o $(TestFile).o
+$(TESTFILE).o: $(TESTFILE).c mol.h
+	$(CC) $(CFLAGS) -c $(TESTFILE).c -o $(TESTFILE).o
 
-run: $(TestFile).o libmol.so
-	$(CC) $(TestFile).o -L. -lmol -o run -lm
+run: $(TESTFILE).o libmol.so
+	$(CC) $(TESTFILE).o -L. -lmol -o run -lm
 clean:
 	rm -f *.o *.so run
 	
